@@ -19,7 +19,7 @@ header {
     height: 90px;
 }
 
-h1 {
+header h1 {
     color: #901C1C;
     margin-right: 100px;
 }
@@ -43,6 +43,11 @@ h1 {
     align-items: center;
     flex-direction: column;
     gap: 5px;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
 }
 
 .photographer_section article h2 {
@@ -70,3 +75,4 @@ h1 {
     font-size: 9px;
     color: #757575;
 }
+

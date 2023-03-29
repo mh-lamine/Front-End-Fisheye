@@ -6,10 +6,27 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    padding: 1em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
+}
+
+.photograph-header h1{
+    color: #D3573C;
+    font-size: 3em;
+    font-weight: 400;
+}
+
+.photograph-header .location{
+    color: #901C1C;
+    margin: .5em 0 1em 0;
+    font-size: 1.5em;
+}
+
+.photograph-header .description{
+    color: #525252;
 }
 
 .contact_button {
@@ -23,6 +40,45 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.profile-pic{
+    width: 60%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.media{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 100px;
+    gap: 3em;
+}
+
+.media img{
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: 5px;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+article .text{
+    display: flex;
+    justify-content: space-between;
+    color: #901C1C;
+}
+
+article .like{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .modal {
