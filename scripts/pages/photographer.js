@@ -1,79 +1,93 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
-const queryString = window.location.search;
-
-const urlParams = new URLSearchParams(queryString);
-
-const urlId = urlParams.get('id')
-
-async function getPhotographers() {
+async function getPhotographersData() {
     const response = await fetch("../data/photographers.json")
     return await response.json()
 }
 
-async function displayData(data) {
+function displayPhotographerInfo(photographer) {
+    const name = document.querySelector( 'h1' );
+    name.textContent = photographer.name;
+            
+    const location = document.querySelector( '.location' );
+    location.textContent = `${photographer.city}, ${photographer.country}`;
+            
+    const description = document.querySelector( '.description' );
+    description.textContent = photographer.tagline;
+            
+    const img = document.querySelector( '.profile-pic' );
+    img.setAttribute("src", `../assets/photographers/Photographers ID Photos/${photographer.portrait}`);
+}
 
-    data.forEach(data => {
+function displayPhotographerMediaList(mediaList, photographerFullName) {
+    photographerFirstName = photographerFullName.split(" ")[0].replace("-", " ");
+    
+    mediaList.forEach(media => {
+        
+        const mediaSection = document.querySelector(".media");
+        
+        const article = document.createElement( 'article' );
+        mediaSection.appendChild(article);
 
-        if(data.id == urlId) {
-            const name = document.querySelector( 'h1' );
-            name.textContent = data.name;
-            
-            const location = document.querySelector( '.location' );
-            location.textContent = `${data.city}, ${data.country}`;
-            
-            const description = document.querySelector( '.description' );
-            description.textContent = data.tagline;
-            
-            const img = document.querySelector( '.profile-pic' );
-            img.setAttribute("src", `../assets/photographers/Photographers ID Photos/${data.portrait}`);
+        if (media.video) {
+            path = `../assets/photographers/${photographerFirstName}/${media.video}`
+            const video = document.createElement( 'video' );
+            video.setAttribute("src", path);
+            article.appendChild(video);
         }
-
-        if(data.photographerId == urlId) {
-            const mediaSection = document.querySelector(".media");
-            
-            const article = document.createElement( 'article' );
-
-            const text = document.createElement( 'div' );
-            text.setAttribute("class", "text");
-
-            const like = document.createElement( 'div' );
-            like.setAttribute("class", "like");
-
+        if (media.image) {
+            path = `../assets/photographers/${photographerFirstName}/${media.image}`
             const img = document.createElement( 'img' );
-            img.setAttribute("src", "../assets/photographers/Mimi/Animals_Rainbow.jpg");
-
-            const title = document.createElement( 'p' );
-            title.setAttribute("class", "title");
-            title.textContent = `${data.title}`;
-
-            const likes = document.createElement( 'p' );
-            likes.textContent = `${data.likes}`;
-
-            const heart = document.createElement( 'i' );
-            heart.setAttribute("class", "fa-solid fa-heart");
-
-            mediaSection.appendChild(article);
+            img.setAttribute("src", path);
             article.appendChild(img);
-            article.appendChild(text);
-            text.appendChild(title);
-            text.appendChild(like);
-            like.appendChild(likes);
-            like.appendChild(heart);
-        }
+        } 
+        
+        const text = document.createElement( 'div' );
+        text.setAttribute("class", "text");
+        article.appendChild(text);
+        
+        const title = document.createElement( 'p' );
+        title.setAttribute("class", "title");
+        title.textContent = `${media.title}`;
+        text.appendChild(title);
+        
+        const like = document.createElement( 'div' );
+        like.setAttribute("class", "like");
+        text.appendChild(like);
+
+        const heart = document.createElement( 'i' );
+        heart.setAttribute("class", "fa-solid fa-heart");
+        like.appendChild(heart);
+        
+        const likes = document.createElement( 'p' );
+        likes.textContent = `${media.likes}`;
+        like.appendChild(likes);
+        
     });
 }
 
-
-
-
 async function init() {
-    // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
-    displayData(photographers);
+
+    const { photographers, mediaList } = await getPhotographersData();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const photographerId = urlParams.get('id')
+
+    const photographer = photographers.find(
+        (p) => p.id == photographerId 
+    );
+
+    displayPhotographerInfo(photographer);
+
+
+    const photographerMediaList = mediaList.filter(
+        media => media.photographerId == photographer.id
+    );
+
+    const name = photographer.name;
+
+    displayPhotographerMedia(photographerMediaList, name);
     
-    const { media } = await getPhotographers();
-    displayData(media);
 };
 
 
