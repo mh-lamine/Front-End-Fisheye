@@ -1,7 +1,7 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
 async function getPhotographersData() {
-    const response = await fetch("../data/photographers.json")
+    const response = await fetch("data/photographers.json")
     return await response.json()
 }
 
@@ -20,14 +20,28 @@ function displayPhotographerInfo(photographer) {
 
 }
 
+function displayLightbox(mediaList, index) {
+    const lightbox = document.querySelector( '.lightbox-container' )
+    lightbox.style.display = "block";
+    
+    const close = document.querySelector( 'i' )
+    close.addEventListener("click", function() {
+        lightbox.style.display = "none";
+    })
+    console.log
+}
+
 function displayPhotographerMedia(mediaList, photographerFullName) {
     photographerFirstName = photographerFullName.split(" ")[0].replace("-", " ");
     
-    mediaList.forEach(media => {
+    mediaList.forEach((media, index) => {
         
         const mediaSection = document.querySelector("#media");
         
         const article = document.createElement( 'article' );
+        article.addEventListener("click", () => {
+            displayLightbox(mediaList, index)
+        })
         mediaSection.appendChild(article);
 
         if (media.video) {
@@ -137,6 +151,8 @@ function mediaSorting(photographerMediaList, name) {
         displayPhotographerMedia(photographerMediaList, name);
     });
 }
+
+
 
 async function init() {
 

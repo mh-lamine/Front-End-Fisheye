@@ -102,6 +102,33 @@ article .like{
     cursor: pointer;
 }
 
+.lightbox-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+}
+
+.lightbox i{
+    color: #901C1C;
+    top: 0;
+    right: 0;
+    width: 20px;
+}
+
+.lightbox{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee;
+    height: 80vh;
+    aspect-ratio: 3/2;
+}
+
 .infos{
     position: fixed;
     bottom: 0;
