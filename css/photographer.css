@@ -109,24 +109,54 @@ article .like{
     left: 0;
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(4px);
+    background-color: #ffffff;
 }
 
-.lightbox i{
+.close{
+    position: fixed;
     color: #901C1C;
-    top: 0;
-    right: 0;
-    width: 20px;
+    top: 25px;
+    right: 100px;
+    font-size: 40px;
+}
+
+.right{
+    color: #901C1C;
+    font-size: 40px;
 }
 
 .lightbox{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.left{
+    color: #901C1C;
+    font-size: 40px;
+}
+
+.media-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 80vw;
     height: 80vh;
-    aspect-ratio: 3/2;
+}
+
+.media-container .title{
+    color: #901C1C;
+}
+
+.media-container img, .media-container video{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .infos{

@@ -21,14 +21,43 @@ function displayPhotographerInfo(photographer) {
 }
 
 function displayLightbox(mediaList, index) {
-    const lightbox = document.querySelector( '.lightbox-container' )
-    lightbox.style.display = "block";
+    const mediaContainer = document.querySelector( '.media-container' )
+
+    const lightboxContainer = document.querySelector( '.lightbox-container' )
+    lightboxContainer.style.display = "block";
     
-    const close = document.querySelector( 'i' )
+    const close = document.querySelector( '.close' )
     close.addEventListener("click", function() {
-        lightbox.style.display = "none";
+        lightboxContainer.style.display = "none";
+        mediaContainer.innerHTML = ""
     })
-    console.log
+    
+    
+    if (mediaList[index].video) {
+        path = `../assets/photographers/${photographerFirstName}/${mediaList[index].video}`
+
+        const video = document.createElement( 'video' );
+        video.setAttribute("src", path);
+        video.setAttribute("autoplay", true);
+        mediaContainer.appendChild(video);
+
+        const title = document.createElement( 'p' );
+        title.setAttribute("class", "title");
+        title.textContent = `${mediaList[index].title}`;
+        mediaContainer.appendChild(title);
+    }
+    if (mediaList[index].image) {
+        path = `../assets/photographers/${photographerFirstName}/${mediaList[index].image}`
+
+        const img = document.createElement( 'img' );
+        img.setAttribute("src", path);
+        mediaContainer.appendChild(img);
+
+        const title = document.createElement( 'p' );
+        title.setAttribute("class", "title");
+        title.textContent = `${mediaList[index].title}`;
+        mediaContainer.appendChild(title);
+    } 
 }
 
 function displayPhotographerMedia(mediaList, photographerFullName) {
@@ -39,21 +68,25 @@ function displayPhotographerMedia(mediaList, photographerFullName) {
         const mediaSection = document.querySelector("#media");
         
         const article = document.createElement( 'article' );
-        article.addEventListener("click", () => {
-            displayLightbox(mediaList, index)
-        })
+        
         mediaSection.appendChild(article);
 
         if (media.video) {
             path = `../assets/photographers/${photographerFirstName}/${media.video}`
             const video = document.createElement( 'video' );
             video.setAttribute("src", path);
+            video.addEventListener("click", () => {
+                displayLightbox(mediaList, index)
+            })
             article.appendChild(video);
         }
         if (media.image) {
             path = `../assets/photographers/${photographerFirstName}/${media.image}`
             const img = document.createElement( 'img' );
             img.setAttribute("src", path);
+            img.addEventListener("click", () => {
+                displayLightbox(mediaList, index)
+            })
             article.appendChild(img);
         } 
         
