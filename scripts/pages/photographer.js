@@ -60,11 +60,12 @@ function displayLightbox(mediaList, index) {
     } 
 }
 
+
 function displayPhotographerMedia(mediaList, photographerFullName) {
     photographerFirstName = photographerFullName.split(" ")[0].replace("-", " ");
     
     mediaList.forEach((media, index) => {
-        
+
         const mediaSection = document.querySelector("#media");
         
         const article = document.createElement( 'article' );
@@ -128,7 +129,16 @@ function displayPhotographerMedia(mediaList, photographerFullName) {
     });
 }
 
-
+function navigation(photographerMediaList, index) {
+    document.addEventListener("keydown", function(event){
+        console.log("click", event.keyCode)
+        if (event.keyCode === 37) {
+            index+= 1;
+            document.querySelector( '.media-container' ).innerHTML = "";
+            displayLightbox(photographerMediaList, index)
+        }
+    })
+}
 
 function likesCount(mediaList) {
     let totalLikes = 0; 
@@ -215,6 +225,9 @@ async function init() {
     photographerMediaList.sort(byPop)
 
     displayPhotographerMedia(photographerMediaList, name);
+    let index = 0;
+
+    navigation(photographerMediaList, index);
 
     
 };
