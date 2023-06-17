@@ -44,27 +44,51 @@
       <section id="media"></section>
     </main>
     <section class="lightbox-container">
-      <i class="fa-sharp fa-solid fa-xmark close"></i>
-      <article class="lightbox">
-        <i class="fa-solid fa-chevron-left left"></i>
-        <div class="media-container"></div>
-        <i class="fa-solid fa-chevron-right right"></i>
+      <i
+        class="fa-sharp fa-solid fa-xmark close"
+        aria-label="close dialog"
+        tabindex="0"
+      ></i>
+      <article class="lightbox" aria-label="lightbox">
+        <i
+          class="fa-solid fa-chevron-left left"
+          aria-label="previous image"
+          tabindex="0"
+        ></i>
+        <div class="media-container" aria-label="image closeup view"></div>
+        <i
+          class="fa-solid fa-chevron-right right"
+          aria-label="next image"
+          tabindex="0"
+        ></i>
       </article>
     </section>
 
     <div class="infos"></div>
     <div id="contact_modal">
       <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
+        <section class="modal-header">
+          <h2>Contactez-moi <br /><span class="contact"></span></h2>
+          <img
+            src="assets/icons/close.svg"
+            onclick="closeModal()"
+            aria-label="close contact form"
+            class="modalClose"
+            tabindex="0"
+          />
+        </section>
         <form>
-          <div>
-            <label>Prénom</label>
-            <input />
-          </div>
-          <button class="contact_button">Envoyer</button>
+          <label for="firstName">Prénom</label>
+          <input id="firstName" aria-label="first name" tabindex="0" />
+          <label for="lastName">Nom</label>
+          <input id="lastName" aria-label="last name" tabindex="0" />
+          <label for="email">Email</label>
+          <input id="email" aria-label="email" tabindex="0" />
+          <label for="message">Message</label>
+          <input id="message" aria-label="your message" tabindex="0" />
+          <button id="submit_button" aria-label="send" tabindex="0">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>
