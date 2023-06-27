@@ -28,7 +28,6 @@ function displayModal() {
 
 document.addEventListener("keydown", function(event){
     if (event.keyCode === 27) {
-        console.log("clciked")
         closeModal();
 }})
 

@@ -24,16 +24,13 @@ function displayPhotographerInfo(photographer) {
 
 }
 
-
-
 function displayLightbox(mediaList, index) {
     document.querySelector("body").style.overflow = "hidden";
 
     const mediaContainer = document.querySelector( '.media-container' );
     
-    const lightboxContainer = document.querySelector( '.lightbox-container' );
+    let lightboxContainer = document.querySelector( '.lightbox-container' );
     lightboxContainer.style.display = "block";
-    
     
     let lastFocusableElement = document.querySelector( '.right' );
     let firstFocusableElement = document.querySelector( '.close' );
@@ -47,23 +44,22 @@ function displayLightbox(mediaList, index) {
         mediaContainer.innerHTML = "";
     })
 
-    lightboxContainer.addEventListener('keydown', function(event){
-
-        if(event.key === 'Tab' || event.keycode === 9) {
-            if (event.shiftKey) {
-                if (document.activeElement === firstFocusableElement) {
-                    event.preventDefault();
-                    lastFocusableElement.focus();
-                }
-            } else {
-                if (document.activeElement === lastFocusableElement) {
-                    event.preventDefault();
-                    firstFocusableElement.focus();
-                }
+    lightboxContainer.addEventListener('keydown', function (event) {
+        if (event.key === 'Tab' || event.keyCode === 9) {
+      
+          if (event.shiftKey) {
+            if (document.activeElement === firstFocusableElement) {
+              event.preventDefault();
+              lastFocusableElement.focus();
             }
+          } else {
+            if (document.activeElement === lastFocusableElement) {
+              event.preventDefault();
+              firstFocusableElement.focus();
+            }
+          }
         }
     });
-    
 
     document.addEventListener("keydown", function(event){
         if (event.keyCode === 27) {
@@ -162,9 +158,6 @@ function navigation(mediaList, index){
         updateLightbox(mediaList, index)
     })
 }
-
-
-
 
 function displayPhotographerMedia(mediaList, photographerFullName) {
     photographerFirstName = photographerFullName.split(" ")[0].replace("-", " ");
@@ -330,5 +323,3 @@ async function init() {
 
 
 init();
-
-// tabindex="-1" sur les elements à éviter

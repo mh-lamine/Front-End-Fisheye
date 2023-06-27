@@ -115,14 +115,14 @@ article .like{
 
 .close{
     position: fixed;
-    color: #901C1C;
+    fill: #901C1C;
     top: 25px;
     right: 100px;
     font-size: 40px;
 }
 
-.right{
-    color: #901C1C;
+.left, .right{
+    fill: #901C1C;
     font-size: 40px;
 }
 
@@ -135,11 +135,6 @@ article .like{
     width: 80vw;
     height: 100vh;
     margin: 0 auto;
-}
-
-.left{
-    color: #901C1C;
-    font-size: 40px;
 }
 
 .media-container{
